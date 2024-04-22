@@ -1,7 +1,10 @@
 import Button from "../components/Button";
 import { useGetLocationSuccessCallback } from "../services/jsBridge/callback/location";
 import { triggerNativeGetLocation } from "../services/jsBridge/core/location";
-import { triggerNativeGetCameraImage } from "../services/jsBridge/core/camera";
+import {
+  triggerNativeGetCameraImage,
+  triggerNativeGetQrCode,
+} from "../services/jsBridge/core/camera";
 import { useOpenCameraCallback } from "../services/jsBridge/callback/camera";
 import { useHandleErrorJSBridge } from "../services/jsBridge/callback/error";
 import {
@@ -10,15 +13,16 @@ import {
 } from "../services/jsBridge/core/gallery";
 import { useSaveImageToGalleryCallback } from "../services/jsBridge/callback/gallery";
 import useLocationStore from "../stores/location";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   const testMsg = useLocationStore((state) => state.test);
-  const setTest = useLocationStore((state) => state.setTest);
+  // const setTest = useLocationStore((state) => state.setTest);
 
   const onClickOpenCameraJSBridge = () => {
     triggerNativeGetCameraImage((base64Image: string) => {
-      setTest("useOpenCameraCallback");
-      console.log("base64Image", base64Image);
+      navigate("/image", { state: { base64Image } });
     }, useHandleErrorJSBridge);
   };
 
@@ -32,6 +36,12 @@ export default function Home() {
       useSaveImageToGalleryCallback,
       useHandleErrorJSBridge
     );
+  };
+
+  const onClickScanQRCodeJSBridge = () => {
+    triggerNativeGetQrCode((qrData: string) => {
+      navigate("/qr-code", { state: { qrData } });
+    }, useHandleErrorJSBridge);
   };
 
   const onClickGetLocationJSBridge = () => {
@@ -65,7 +75,7 @@ export default function Home() {
           }}
         />
         <Button label="เปิด gallery - JavaScript" />
-        <Button label="Scan QR Code" />
+        <Button label="Scan QR Code" onClick={onClickScanQRCodeJSBridge} />
         <Button
           label="get location - JSBridge"
           onClick={onClickGetLocationJSBridge}
