@@ -2,13 +2,13 @@ const triggerNativeGetCameraImage = (
   callback: (base64Image: string) => void,
   callbackError: (errorCode: string, errorDescription: string) => void
 ) => {
-  if (window.bridge) {
+  // if (window.bridge) {
     window.bridge.getCameraImageCallbackError = callbackError;
     window.bridge.getCameraImageCallback = callback;
 
     console.log("Hi");
     
-  }
+  // }
 
   if (window.JSBridge) {
     // android
