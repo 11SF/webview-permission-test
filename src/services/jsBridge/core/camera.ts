@@ -5,6 +5,9 @@ const triggerNativeGetCameraImage = (
   if (window.bridge) {
     window.bridge.getCameraImageCallbackError = callbackError;
     window.bridge.getCameraImageCallback = callback;
+
+    console.log("Hi");
+    
   }
 
   if (window.JSBridge) {
@@ -36,6 +39,8 @@ const triggerNativeGetQrCode = (
     window.bridge.getQrCodeCallbackError = callbackError;
     window.bridge.getQrCodeCallback = callback;
 
+    console.log("Hi QR");
+    
     const message = { name: "getQrCode" };
     window.webkit.messageHandlers.observer.postMessage(message);
   }
