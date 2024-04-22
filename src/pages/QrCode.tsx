@@ -9,7 +9,7 @@ export default function QrCode() {
     <div className=" flex flex-col gap-[32px] items-center">
       <div className="text-center text-xl font-bold">QR Code data</div>
 
-      <p>{location.state?.data ?? "no data"}</p>
+      <p>{location.state?.qrData ?? "no data"}</p>
 
       <Button
         className="w-full"
