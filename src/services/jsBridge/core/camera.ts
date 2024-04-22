@@ -17,7 +17,7 @@ const triggerNativeGetCameraImage = (
     window.bridge.getCameraImageCallbackError = callbackError;
     window.bridge.getCameraImageCallback = callback;
     window.webkit.messageHandlers.observer.postMessage({
-      name: "getCameraImage",
+      name: 'getCameraImage',
     });
   }
 };
