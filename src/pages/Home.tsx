@@ -9,8 +9,12 @@ import {
   triggerNativeSaveImageToGallery,
 } from "../services/jsBridge/core/gallery";
 import { useSaveImageToGalleryCallback } from "../services/jsBridge/callback/gallery";
+import useLocationStore from "../stores/location";
 
 export default function Home() {
+
+  const testMsg = useLocationStore((state) => state.test);
+
   const onClickOpenCameraJSBridge = () => {
     triggerNativeGetCameraImage(useOpenCameraCallback, useHandleErrorJSBridge);
   };
@@ -37,11 +41,12 @@ export default function Home() {
     );
   };
 
-  
+
 
   return (
     <div className="flex flex-col gap-[16px]">
       <h1 className="font-bold">เลือกหัวข้อที่ต้องการทดสอบ</h1>
+      {testMsg}
       <div className="flex flex-col gap-[8px]">
         <Button
           label="เปิดกล้อง - JSBridge"
