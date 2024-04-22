@@ -11,9 +11,9 @@ const triggerNativeGetCameraImage = (
     // ios
     window.bridge.getCameraImageCallbackError = callbackError;
     window.bridge.getCameraImageCallback = callback;
-    window.webkit.messageHandlers.observer.postMessage(
-      JSON.stringify({ name: "getCameraImage" })
-    );
+
+    const message = { name: "getCameraImage" };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 
@@ -30,9 +30,9 @@ const triggerNativeGetQrCode = (
     // ios
     window.bridge.getQrCodeCallbackError = callbackError;
     window.bridge.getQrCodeCallback = callback;
-    window.webkit.messageHandlers.observer.postMessage(
-      JSON.stringify({ name: "getQrCode" })
-    );
+
+    const message = { name: "getQrCode" };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 

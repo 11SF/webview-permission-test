@@ -11,9 +11,9 @@ const triggerNativeGetGalleryImage = (
     // ios
     window.bridge.getGalleryImageCallbackError = callbackError;
     window.bridge.getGalleryImageCallback = callback;
-    window.webkit.messageHandlers.observer.postMessage({
-      name: "getGalleryImage",
-    });
+
+    const message = { name: "getGalleryImage" };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 
@@ -31,10 +31,9 @@ const triggerNativeSaveImageToGallery = (
     // ios
     window.bridge.saveImageToGalleryCallbackError = callbackError;
     window.bridge.saveImageToGalleryCallback = callback;
-    window.webkit.messageHandlers.observer.postMessage({
-      name: "saveImageToGallery",
-      base64Str: data,
-    });
+
+    const message = { name: "saveImageToGallery", base64Str: data };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 

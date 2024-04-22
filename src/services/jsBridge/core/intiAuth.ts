@@ -11,9 +11,9 @@ const initAuth = (
     // ios
     window.bridge.initAuthCallback = callback;
     window.bridge.initAuthCallbackError = callbackError;
-    window.webkit.messageHandlers.observer.postMessage({
-      name: "initAuth",
-    });
+
+    const message = { name: "initAuth" };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 

@@ -12,10 +12,9 @@ const triggerNativeGetLocation = (
     // iOS
     window.bridge.getLocationCallbackError = callbackError;
     window.bridge.getLocationCallback = callback;
-    window.webkit.messageHandlers.observer.postMessage({
-      name: "getLocation",
-      isContinuous: isContinuous,
-    });
+
+    const message = { name: "getLocation", isContinuous: isContinuous };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 
@@ -32,9 +31,9 @@ const stopNativeLocationUpdates = (
     // iOS
     window.bridge.stopLocationUpdatesCallback = callback;
     window.bridge.stopLocationUpdatesCallbackError = callbackError;
-    window.webkit.messageHandlers.observer.postMessage({
-      name: "stopLocationUpdates",
-    });
+
+    const message = { name: "stopLocationUpdates" };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 

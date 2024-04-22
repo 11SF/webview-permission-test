@@ -9,10 +9,9 @@ const openPwP = (
   } else if (window.webkit) {
     // ios
     window.bridge.openPwPCallbackError = callbackError;
-    window.webkit.messageHandlers.observer.postMessage({
-      name: "openPwP",
-      ppoaTnxRefId: ppoaTnxRefId,
-    });
+
+    const message = { name: "openPwP", ppoaTnxRefId: ppoaTnxRefId };
+    window.webkit.messageHandlers.observer.postMessage(message);
   }
 };
 
