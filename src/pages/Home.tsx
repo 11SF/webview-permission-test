@@ -3,7 +3,6 @@ import {
   triggerNativeGetCameraImage,
   triggerNativeGetQrCode,
 } from "../services/jsBridge/core/camera";
-import { useOpenCameraCallback } from "../services/jsBridge/callback/camera";
 import { useHandleErrorJSBridge } from "../services/jsBridge/callback/error";
 import {
   triggerNativeGetGalleryImage,
@@ -24,7 +23,9 @@ export default function Home() {
   };
 
   const onClickOpenGalleryJSBridge = () => {
-    triggerNativeGetGalleryImage(useOpenCameraCallback, useHandleErrorJSBridge);
+    triggerNativeGetGalleryImage((base64Image: string) => {
+      navigate("/image", { state: { base64Image } });
+    }, useHandleErrorJSBridge);
   };
 
   const onClickSaveImageJSBridge = (data: string) => {

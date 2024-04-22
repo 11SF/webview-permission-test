@@ -17,9 +17,8 @@ export default function Location() {
 
   const [location, setLocation] = useState<locationType | null>(null);
 
-  const onClickGetLocationJSBridge = () => {
+  useEffect(() => {
     const isContinuous = true;
-
     triggerNativeGetLocation(
       isContinuous,
       (lat: number, long: number) => {
@@ -28,10 +27,6 @@ export default function Location() {
       },
       useHandleErrorJSBridge
     );
-  };
-
-  useEffect(() => {
-    onClickGetLocationJSBridge;
   }, []);
 
   return (
