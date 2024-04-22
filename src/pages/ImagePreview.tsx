@@ -10,7 +10,7 @@ export default function ImagePreview() {
       <div className="text-center text-xl font-bold">Image Preview</div>
       <img
         className="h-[512px] object-contain"
-        src={location.state?.base64Image ?? ""}
+        src={location.state?.base64Image}
       />
 
       <Button
