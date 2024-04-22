@@ -1,5 +1,4 @@
 import Button from "../components/Button";
-import { useGetLocationSuccessCallback } from "../services/jsBridge/callback/location";
 import { triggerNativeGetLocation } from "../services/jsBridge/core/location";
 import {
   triggerNativeGetCameraImage,
@@ -18,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
   const testMsg = useLocationStore((state) => state.test);
-  // const setTest = useLocationStore((state) => state.setTest);
+  const setLocation = useLocationStore((state) => state.setLocation);
 
   const onClickOpenCameraJSBridge = () => {
     triggerNativeGetCameraImage((base64Image: string) => {
@@ -49,7 +48,10 @@ export default function Home() {
 
     triggerNativeGetLocation(
       isContinuous,
-      useGetLocationSuccessCallback,
+      (lat: number, long: number) => {
+        const location = { latitude: lat, longitude: long };
+        setLocation(location);
+      },
       useHandleErrorJSBridge
     );
   };
