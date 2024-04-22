@@ -12,11 +12,14 @@ import { useSaveImageToGalleryCallback } from "../services/jsBridge/callback/gal
 import useLocationStore from "../stores/location";
 
 export default function Home() {
-
   const testMsg = useLocationStore((state) => state.test);
+  const setTest = useLocationStore((state) => state.setTest);
 
   const onClickOpenCameraJSBridge = () => {
-    triggerNativeGetCameraImage(useOpenCameraCallback, useHandleErrorJSBridge);
+    triggerNativeGetCameraImage((base64Image: string) => {
+      setTest("useOpenCameraCallback");
+      console.log("base64Image", base64Image);
+    }, useHandleErrorJSBridge);
   };
 
   const onClickOpenGalleryJSBridge = () => {
@@ -40,8 +43,6 @@ export default function Home() {
       useHandleErrorJSBridge
     );
   };
-
-
 
   return (
     <div className="flex flex-col gap-[16px]">
