@@ -1,12 +1,38 @@
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import useLocationStore from "../stores/location";
+import { useEffect, useState } from "react";
+import { useHandleErrorJSBridge } from "../services/jsBridge/callback/error";
+import { triggerNativeGetLocation } from "../services/jsBridge/core/location";
+
+interface locationType {
+  latitude: number;
+  longitude: number;
+}
 
 export default function Location() {
   const navigate = useNavigate();
-  const location = useLocationStore((state) => state.location);
   const status = useLocationStore((state) => state.status);
   const locationUpdatedAt = useLocationStore((state) => state.lastUpdatedAt);
+
+  const [location, setLocation] = useState<locationType | null>(null);
+
+  const onClickGetLocationJSBridge = () => {
+    const isContinuous = true;
+
+    triggerNativeGetLocation(
+      isContinuous,
+      (lat: number, long: number) => {
+        const location = { latitude: lat, longitude: long };
+        setLocation(location);
+      },
+      useHandleErrorJSBridge
+    );
+  };
+
+  useEffect(() => {
+    onClickGetLocationJSBridge;
+  }, []);
 
   return (
     <div className="flex flex-col gap-[32px]">

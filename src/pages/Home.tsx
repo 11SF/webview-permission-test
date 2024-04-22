@@ -1,5 +1,4 @@
 import Button from "../components/Button";
-import { triggerNativeGetLocation } from "../services/jsBridge/core/location";
 import {
   triggerNativeGetCameraImage,
   triggerNativeGetQrCode,
@@ -17,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
   const testMsg = useLocationStore((state) => state.test);
-  const setLocation = useLocationStore((state) => state.setLocation);
 
   const onClickOpenCameraJSBridge = () => {
     triggerNativeGetCameraImage((base64Image: string) => {
@@ -41,19 +39,6 @@ export default function Home() {
     triggerNativeGetQrCode((qrData: string) => {
       navigate("/qr-code", { state: { qrData } });
     }, useHandleErrorJSBridge);
-  };
-
-  const onClickGetLocationJSBridge = () => {
-    const isContinuous = true;
-
-    triggerNativeGetLocation(
-      isContinuous,
-      (lat: number, long: number) => {
-        const location = { latitude: lat, longitude: long };
-        setLocation(location);
-      },
-      useHandleErrorJSBridge
-    );
   };
 
   return (
@@ -80,7 +65,9 @@ export default function Home() {
         <Button label="Scan QR Code" onClick={onClickScanQRCodeJSBridge} />
         <Button
           label="get location - JSBridge"
-          onClick={onClickGetLocationJSBridge}
+          onClick={() => {
+            navigate("/location");
+          }}
         />
         <Button label="get location - JavaScript" />
         <Button label="initAuth for access PT Pass" />
