@@ -9,9 +9,17 @@ export default function Camera() {
     <div className=" flex flex-col gap-[32px]">
       <div className="text-center text-xl font-bold">Image Preview</div>
 
-      <Webcam audio={false} onUserMediaError={() => {
-        navigate("/error", { state: { errorCode: "error", errorDescription: "error" } });
-      }}/>
+      <Webcam
+        audio={false}
+        onUserMediaError={() => {
+          navigate("/error", {
+            state: { errorCode: "error", errorDescription: "error" },
+          });
+        }}
+        videoConstraints={{
+          facingMode: "environment",
+        }}
+      />
       <Button
         className="w-full"
         label="Back"
