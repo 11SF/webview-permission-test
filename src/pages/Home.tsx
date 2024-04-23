@@ -12,10 +12,12 @@ import useLocationStore from "../stores/location";
 import { useNavigate } from "react-router-dom";
 import { initAuth } from "../services/jsBridge/core/intiAuth";
 import usePaotangPassStore from "../stores/paotangPass";
+import { useRef } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
   const testMsg = useLocationStore((state) => state.test);
+  const inputFile = useRef<HTMLInputElement>(null);
   const setAuthorizationCode = usePaotangPassStore(
     (state) => state.setAuthorizationCode
   );
@@ -37,13 +39,14 @@ export default function Home() {
   };
 
   const onClickOpenGalleryJavaScript = () => {
-    navigator.storage.persist().then((canPersist) => {
-      if (!canPersist) {
-        navigate("/error", {
-          state: { errorCode: "error", errorDescription: "error" },
-        });
-      }
-    });
+    // navigator.storage.persist().then((canPersist) => {
+    //   if (!canPersist) {
+    //     navigate("/error", {
+    //       state: { errorCode: "error", errorDescription: "error" },
+    //     });
+    //   }
+    // });
+    inputFile.current?.click();
   };
 
   const onClickSaveImageJSBridge = (data: string) => {
@@ -95,7 +98,22 @@ export default function Home() {
             onClickSaveImageJSBridge("sdfsf");
           }}
         />
-        <Button label="เปิด gallery - JavaScript" onClick={onClickOpenGalleryJavaScript} />
+
+        <div>
+          <input
+            className="w-full"
+            style={{ display: "none" }}
+            ref={inputFile}
+            type="file"
+            accept="image/*"
+          />
+          <Button
+            className="w-full"
+            label="เปิด gallery - JavaScript"
+            onClick={onClickOpenGalleryJavaScript}
+          ></Button>
+        </div>
+
         <Button label="Scan QR Code" onClick={onClickScanQRCodeJSBridge} />
         <Button
           label="get location - JSBridge"

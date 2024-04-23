@@ -1,6 +1,9 @@
+import { ReactNode } from "react";
+
 interface propsType {
   className?: string;
   label: string;
+  children?: ReactNode;
   onClick?: () => void;
 }
 
@@ -11,6 +14,7 @@ export default function Button(props: propsType) {
       onClick={props.onClick}
     >
       {props.label}
+      {props.children}
     </button>
   );
 }
