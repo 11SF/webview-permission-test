@@ -58,6 +58,7 @@ export default function Home() {
   };
 
   const handleErrorJSBridge = (errorCode: string, errorDescription: string) => {
+    if (errorCode.includes("onCancel")) return;
     navigate("/error", { state: { errorCode, errorDescription } });
   };
 
