@@ -27,17 +27,7 @@ export default function Home() {
   };
 
   const onClickOpenCameraJavaScript = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        audio: false,
-        video: true,
-      })
-      .then(() => {
-        alert("success");
-      })
-      .catch((err) => {
-        handleErrorJSBridge("error", err.message);
-      });
+    navigate("/camera");
   };
 
   const onClickOpenGalleryJSBridge = () => {

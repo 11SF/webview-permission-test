@@ -7,6 +7,7 @@ import ImagePreview from "./pages/ImagePreview";
 import QrCode from "./pages/QrCode";
 import InitAuthCallback from "./pages/InitAuthCallback";
 import { useEffect } from "react";
+import Camera from "./pages/Camera";
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/location" element={<Location />} />
         <Route path="/image" element={<ImagePreview />} />
         <Route path="/qr-code" element={<QrCode />} />
+        <Route path="/camera" element={<Camera />} />
         <Route path="/callback" element={<InitAuthCallback />} />
         <Route path="/error" element={<ErrorPage />} />
 
