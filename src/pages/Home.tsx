@@ -26,6 +26,20 @@ export default function Home() {
     }, handleErrorJSBridge);
   };
 
+  const onClickOpenCameraJavaScript = () => {
+    navigator.mediaDevices
+      .getUserMedia({
+        audio: false,
+        video: true,
+      })
+      .then(() => {
+        alert("success");
+      })
+      .catch((err) => {
+        handleErrorJSBridge("error", err.message);
+      });
+  };
+
   const onClickOpenGalleryJSBridge = () => {
     triggerNativeGetGalleryImage((base64Image: string) => {
       navigate("/image", { state: { base64Image } });
@@ -66,7 +80,10 @@ export default function Home() {
           label="เปิดกล้อง - JSBridge"
           onClick={onClickOpenCameraJSBridge}
         />
-        <Button label="เปิดกล้อง - JavaScript" />
+        <Button
+          label="เปิดกล้อง - JavaScript"
+          onClick={onClickOpenCameraJavaScript}
+        />
         <Button
           label="เปิด gallery - JSBridge"
           onClick={onClickOpenGalleryJSBridge}
