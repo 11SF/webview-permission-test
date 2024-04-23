@@ -49,6 +49,31 @@ export default function Home() {
     inputFile.current?.click();
   };
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (files && files.length) {
+      toBase64(files[0])
+        .then((base64) => {
+          console.log(base64);
+          
+          navigate("/image", { state: { base64Image: base64 } });
+        })
+        .catch(() => {
+          navigate("/error", {
+            state: { errorCode: "error", errorDescription: "error" },
+          });
+        });
+    }
+  };
+
+  const toBase64 = (file: File) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
+
   const onClickSaveImageJSBridge = (data: string) => {
     triggerNativeSaveImageToGallery(
       data,
@@ -106,6 +131,7 @@ export default function Home() {
             ref={inputFile}
             type="file"
             accept="image/*"
+            onChange={handleFileUpload}
           />
           <Button
             className="w-full"
