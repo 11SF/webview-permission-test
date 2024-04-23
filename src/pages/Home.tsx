@@ -11,10 +11,15 @@ import {
 import { useSaveImageToGalleryCallback } from "../services/jsBridge/callback/gallery";
 import useLocationStore from "../stores/location";
 import { useNavigate } from "react-router-dom";
+import { initAuth } from "../services/jsBridge/core/intiAuth";
+import usePaotangPassStore from "../stores/paotangPass";
 
 export default function Home() {
   const navigate = useNavigate();
   const testMsg = useLocationStore((state) => state.test);
+  const setAuthorizationCode = usePaotangPassStore(
+    (state) => state.setAuthorizationCode
+  );
 
   const onClickOpenCameraJSBridge = () => {
     triggerNativeGetCameraImage((base64Image: string) => {
@@ -39,6 +44,13 @@ export default function Home() {
   const onClickScanQRCodeJSBridge = () => {
     triggerNativeGetQrCode((qrData: string) => {
       navigate("/qr-code", { state: { qrData } });
+    }, useHandleErrorJSBridge);
+  };
+
+  const onClickInitAuthJSBridge = () => {
+    initAuth((authorizationCode: string) => {
+      setAuthorizationCode(authorizationCode);
+      navigate("/callback")
     }, useHandleErrorJSBridge);
   };
 
@@ -71,7 +83,10 @@ export default function Home() {
           }}
         />
         <Button label="get location - JavaScript" />
-        <Button label="initAuth for access PT Pass" />
+        <Button
+          label="initAuth for access PT Pass"
+          onClick={onClickInitAuthJSBridge}
+        />
       </div>
     </div>
   );
