@@ -27,6 +27,8 @@ export default function ImagePreview() {
           navigate("/");
         }}
       />
+
+      {location.state.base64Image}
     </div>
   );
 }
