@@ -3,7 +3,6 @@ import {
   triggerNativeGetCameraImage,
   triggerNativeGetQrCode,
 } from "../services/jsBridge/core/camera";
-import { useHandleErrorJSBridge } from "../services/jsBridge/callback/error";
 import {
   triggerNativeGetGalleryImage,
   triggerNativeSaveImageToGallery,
@@ -24,34 +23,38 @@ export default function Home() {
   const onClickOpenCameraJSBridge = () => {
     triggerNativeGetCameraImage((base64Image: string) => {
       navigate("/image", { state: { base64Image } });
-    }, useHandleErrorJSBridge);
+    }, handleErrorJSBridge);
   };
 
   const onClickOpenGalleryJSBridge = () => {
     triggerNativeGetGalleryImage((base64Image: string) => {
       navigate("/image", { state: { base64Image } });
-    }, useHandleErrorJSBridge);
+    }, handleErrorJSBridge);
   };
 
   const onClickSaveImageJSBridge = (data: string) => {
     triggerNativeSaveImageToGallery(
       data,
       useSaveImageToGalleryCallback,
-      useHandleErrorJSBridge
+      handleErrorJSBridge
     );
   };
 
   const onClickScanQRCodeJSBridge = () => {
     triggerNativeGetQrCode((qrData: string) => {
       navigate("/qr-code", { state: { qrData } });
-    }, useHandleErrorJSBridge);
+    }, handleErrorJSBridge);
   };
 
   const onClickInitAuthJSBridge = () => {
     initAuth((authorizationCode: string) => {
       setAuthorizationCode(authorizationCode);
-      navigate("/callback")
-    }, useHandleErrorJSBridge);
+      navigate("/callback");
+    }, handleErrorJSBridge);
+  };
+
+  const handleErrorJSBridge = (errorCode: string, errorDescription: string) => {
+    navigate("/error", { state: { errorCode, errorDescription } });
   };
 
   return (
