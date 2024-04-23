@@ -6,7 +6,7 @@ export default function ImagePreview() {
   const location = useLocation();
 
   const getBase64Image = (base64: string) => {
-    if (base64.includes("data:image/png;base64,")) {
+    if (base64.includes("data:image")) {
       return base64;
     }
     return `data:image/png;base64,${base64}`;
