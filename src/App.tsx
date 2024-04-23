@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <div className="pt-[16px] px-[8px]">
+    <div className="pt-[16px] px-[8px] bg-[#f4f4f4] h-screen">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/location" element={<Location />} />

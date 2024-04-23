@@ -36,6 +36,16 @@ export default function Home() {
     }, handleErrorJSBridge);
   };
 
+  const onClickOpenGalleryJavaScript = () => {
+    navigator.storage.persist().then((canPersist) => {
+      if (!canPersist) {
+        navigate("/error", {
+          state: { errorCode: "error", errorDescription: "error" },
+        });
+      }
+    });
+  };
+
   const onClickSaveImageJSBridge = (data: string) => {
     triggerNativeSaveImageToGallery(
       data,
@@ -63,10 +73,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-[16px]">
+    <div className="flex flex-col gap-[24px]">
       <h1 className="font-bold">เลือกหัวข้อที่ต้องการทดสอบ</h1>
       {testMsg}
-      <div className="flex flex-col gap-[8px]">
+      <div className="flex flex-col gap-[16px]">
         <Button
           label="เปิดกล้อง - JSBridge"
           onClick={onClickOpenCameraJSBridge}
@@ -85,7 +95,7 @@ export default function Home() {
             onClickSaveImageJSBridge("sdfsf");
           }}
         />
-        <Button label="เปิด gallery - JavaScript" />
+        <Button label="เปิด gallery - JavaScript" onClick={onClickOpenGalleryJavaScript} />
         <Button label="Scan QR Code" onClick={onClickScanQRCodeJSBridge} />
         <Button
           label="get location - JSBridge"
