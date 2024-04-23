@@ -90,10 +90,15 @@ export default function Home() {
         <Button
           label="get location - JSBridge"
           onClick={() => {
-            navigate("/location");
+            navigate("/location?mode=jsbridge");
           }}
         />
-        <Button label="get location - JavaScript" />
+        <Button
+          label="get location - JavaScript"
+          onClick={() => {
+            navigate("/location?mode=js");
+          }}
+        />
         <Button
           label="initAuth for access PT Pass"
           onClick={onClickInitAuthJSBridge}
