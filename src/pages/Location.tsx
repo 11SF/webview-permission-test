@@ -43,7 +43,7 @@ export default function Location() {
       setIsContinuous(isContinuous);
 
       triggerNativeGetLocation(
-        isContinuous,
+        false,
         (lat: number, long: number) => {
           const location = { latitude: lat, longitude: long };
           setLocation(location);
