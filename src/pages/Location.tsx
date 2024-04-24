@@ -65,7 +65,7 @@ export default function Location() {
         <b>Long:</b> {location?.longitude ?? "no data"}
       </p>
       <p>
-        <b>isContinuous:</b> {isContinuous}
+        <b>isContinuous:</b> {isContinuous ? "true" : "false"}
       </p>
       <p>
         <b>Updated At:</b> {updatedAt?.toISOString() ?? "no data"}
