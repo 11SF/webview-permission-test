@@ -36,14 +36,14 @@ export default function Location() {
         }
       );
     } else {
-      let isContinuous = false;
+      let _isContinuous = false;
       if (searchParams.get("continuous") === "true") {
-        isContinuous = true;
+        _isContinuous = true;
       }
-      setIsContinuous(isContinuous);
+      setIsContinuous(_isContinuous);
 
       triggerNativeGetLocation(
-        false,
+        _isContinuous,
         (lat: number, long: number) => {
           const location = { latitude: lat, longitude: long };
           setLocation(location);
