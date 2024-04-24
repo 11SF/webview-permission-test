@@ -142,11 +142,18 @@ export default function Home() {
 
         <Button label="Scan QR Code" onClick={onClickScanQRCodeJSBridge} />
         <Button
-          label="get location - JSBridge"
+          label="get location One time - JSBridge"
           onClick={() => {
-            navigate("/location?mode=jsbridge");
+            navigate("/location?mode=jsbridge&continuous=true");
           }}
         />
+        <Button
+          label="get location Continuous - JSBridge"
+          onClick={() => {
+            navigate("/location?mode=jsbridge&continuous=true");
+          }}
+        />
+
         <Button
           label="get location - JavaScript"
           onClick={() => {

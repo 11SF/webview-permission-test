@@ -35,7 +35,11 @@ export default function Location() {
         }
       );
     } else {
-      const isContinuous = true;
+      let isContinuous = false;
+      if (searchParams.get("continuous") === "true") {
+        isContinuous = true;
+      }
+
       triggerNativeGetLocation(
         isContinuous,
         (lat: number, long: number) => {
@@ -62,14 +66,17 @@ export default function Location() {
         <b>Updated At:</b> {updatedAt?.toISOString() ?? "no data"}
       </p>
 
-      <Button
-        label="Stop Location"
-        onClick={() => {
-          stopNativeLocationUpdates((successMessage: string) => {
-            alert(successMessage);
-          }, useHandleErrorJSBridge);
-        }}
-      />
+      {searchParams.get("continuous") === "true" ? (
+        <Button
+          label="Stop Location"
+          onClick={() => {
+            stopNativeLocationUpdates((successMessage: string) => {
+              alert(successMessage);
+            }, useHandleErrorJSBridge);
+          }}
+        />
+      ) : null}
+
       <Button
         className="w-full"
         label="Back"
