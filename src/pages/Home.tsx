@@ -144,7 +144,7 @@ export default function Home() {
         <Button
           label="get location One time - JSBridge"
           onClick={() => {
-            navigate("/location?mode=jsbridge&continuous=true");
+            navigate("/location?mode=jsbridge&continuous=false");
           }}
         />
         <Button
