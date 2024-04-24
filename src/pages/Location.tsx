@@ -18,6 +18,7 @@ export default function Location() {
 
   const [location, setLocation] = useState<locationType | null>(null);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
+  const [isContinuous, setIsContinuous] = useState(false);
 
   useEffect(() => {
     if (searchParams.get("mode") == "js") {
@@ -39,6 +40,7 @@ export default function Location() {
       if (searchParams.get("continuous") === "true") {
         isContinuous = true;
       }
+      setIsContinuous(isContinuous);
 
       triggerNativeGetLocation(
         isContinuous,
@@ -61,6 +63,9 @@ export default function Location() {
       </p>
       <p>
         <b>Long:</b> {location?.longitude ?? "no data"}
+      </p>
+      <p>
+        <b>isContinuous:</b> {isContinuous}
       </p>
       <p>
         <b>Updated At:</b> {updatedAt?.toISOString() ?? "no data"}
