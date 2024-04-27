@@ -27,8 +27,8 @@ export default function Home() {
     }, handleErrorJSBridge);
   };
 
-  const onClickOpenCameraJavaScript = () => {
-    navigate("/camera");
+  const onClickOpenCameraJavaScript = (libName: string) => {
+    navigate(`/camera?lib=${libName}`);
   };
 
   const onClickOpenGalleryJSBridge = () => {
@@ -108,8 +108,16 @@ export default function Home() {
           onClick={onClickOpenCameraJSBridge}
         />
         <Button
-          label="เปิดกล้อง - JavaScript"
-          onClick={onClickOpenCameraJavaScript}
+          label="เปิดกล้อง - JavaScript (react-webcam)"
+          onClick={() => {
+            onClickOpenCameraJavaScript("react-webcam");
+          }}
+        />
+        <Button
+          label="เปิดกล้อง - JavaScript (react-camera-pro)"
+          onClick={() => {
+            onClickOpenCameraJavaScript("react-camera-pro");
+          }}
         />
         <Button
           label="เปิด gallery - JSBridge"
