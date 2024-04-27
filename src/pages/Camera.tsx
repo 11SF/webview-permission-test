@@ -1,8 +1,8 @@
+import { useRef } from "react";
+import { Camera } from "react-camera-pro";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Webcam from "react-webcam";
 import Button from "../components/Button";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useRef, useState } from "react";
-import { Camera } from "react-camera-pro";
 
 export default function CameraPage() {
   const navigate = useNavigate();
